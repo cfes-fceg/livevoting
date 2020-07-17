@@ -1,0 +1,6 @@
+[
+    {
+        "model-name": "Question",
+        "resource-file": "questions.json"
+    }
+]
