@@ -1,5 +1,6 @@
 <?php
 
+use App\Role\UserRole;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -15,12 +16,14 @@ class UsersSeeder extends Seeder
 
         factory(App\User::class, 1)->create([
             'email' => 'admin@example.com',
-            'roles' => [\App\Role\UserRole::ROLE_ADMIN]
+            'name' => 'Admin User',
+            'roles' => [UserRole::ROLE_ADMIN]
         ]);
 
         factory(App\User::class, 1)->create([
             'email' => 'voter@example.com',
-            'roles' => [\App\Role\UserRole::ROLE_VOTER]
+            'name' => 'Voting User',
+            'roles' => [UserRole::ROLE_VOTER]
         ]);
     }
 }
