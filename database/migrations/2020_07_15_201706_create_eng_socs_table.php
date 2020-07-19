@@ -19,7 +19,7 @@ class CreateEngSocsTable extends Migration
             $table->timestamps();
             $table->string('name', 255)->nullable();
             $table->string('location')->nullable();
-            $table->unsignedBigInteger('voter_id')->nullable()->unique();
+            $table->unsignedBigInteger('voter_id')->nullable();
             $table->foreign('voter_id')->references('id')->on('users')->onDelete('set null');
         });
     }
