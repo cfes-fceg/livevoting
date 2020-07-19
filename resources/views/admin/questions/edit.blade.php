@@ -2,27 +2,27 @@
 
 @section('content')
 
-    <div class="panel panel-default">
+    <div class="card card-default">
 
-        <div class="panel-heading clearfix">
+        <div class="card-header clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">{{ !empty($question->title) ? $question->title : 'Question' }}</h4>
+                <h4 class="mt-4 mb-4">{{ !empty($question->title) ? $question->title : 'Question' }}</h4>
             </div>
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            <div class="btn-group btn-group-md float-right" role="group">
 
                 <a href="{{ route('questions.question.index') }}" class="btn btn-primary" title="Show All Question">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Show all
+                    Show all
                 </a>
 
                 <a href="{{ route('questions.question.create') }}" class="btn btn-success" title="Create New Question">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>New
+                    New
                 </a>
 
             </div>
         </div>
 
-        <div class="panel-body">
+        <div class="card-body">
 
             @if ($errors->any())
                 <ul class="alert alert-danger">
@@ -32,17 +32,16 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('questions.question.update', $question->id) }}" id="edit_question_form" name="edit_question_form" accept-charset="UTF-8" class="form-horizontal">
-            {{ csrf_field() }}
-            <input name="_method" type="hidden" value="PUT">
-            @include ('admin.questions.form', [
-                                        'question' => $question,
-                                      ])
+            <form method="POST" action="{{ route('questions.question.update', $question->id) }}" id="edit_question_form"
+                  name="edit_question_form" accept-charset="UTF-8" class="form-horizontal">
+                {{ csrf_field() }}
+                <input name="_method" type="hidden" value="PUT">
+                @include ('admin.questions.form', [
+                                            'question' => $question,
+                                          ])
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Update">
-                    </div>
+                    <input class="btn btn-primary" type="submit" value="Update">
                 </div>
             </form>
 
