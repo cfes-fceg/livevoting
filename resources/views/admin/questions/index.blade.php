@@ -17,7 +17,7 @@
 
         <div class="card-header clearfix">
 
-            <div class="pull-left">
+            <div>
                 <h4 class="mt-4 mb-4">Questions</h4>
             </div>
 
@@ -72,7 +72,7 @@
                                             Edit
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Delete Question" onclick="return confirm(&quot;Click Ok to delete Question.&quot;)">
+                                        <button type="submit" class="btn btn-danger" title="Delete Question" onclick="return confirm('Click Ok to delete Question.')">
                                             Delete
                                         </button>
                                     </div>

@@ -6,11 +6,11 @@
 
         <div class="card-header clearfix">
 
-            <span class="pull-left">
+            <span>
                 <h4 class="mt-4 mb-4">Create New Question</h4>
             </span>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            <div class="btn-group btn-group-md float-right" role="group">
                 <a href="{{ route('questions.question.index') }}" class="btn btn-primary" title="Show All Question">
                     Show all
                 </a>
@@ -28,16 +28,15 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('questions.question.store') }}" accept-charset="UTF-8" id="create_question_form" name="create_question_form" class="form-horizontal">
-            {{ csrf_field() }}
-            @include ('admin.questions.form', [
-                                        'question' => null,
-                                      ])
+            <form method="POST" action="{{ route('questions.question.store') }}" accept-charset="UTF-8"
+                  id="create_question_form" name="create_question_form" class="form-horizontal">
+                {{ csrf_field() }}
+                @include ('admin.questions.form', [
+                                            'question' => null,
+                                          ])
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
-                    </div>
+                    <input class="btn btn-primary" type="submit" value="Add">
                 </div>
 
             </form>
