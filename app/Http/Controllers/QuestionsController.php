@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Question;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class QuestionsController extends Controller
@@ -18,7 +17,9 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::paginate(25);
+        $questions = Question::orderBy('is_active', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(25);
 
         return view('admin.questions.index', compact('questions'));
     }
@@ -146,7 +147,7 @@ class QuestionsController extends Controller
     protected function getData(Request $request)
     {
         $rules = [
-                'title' => 'string|min:1|max:255|nullable',
+            'title' => 'string|min:1|max:255|nullable',
             'is_active' => 'boolean|nullable',
         ];
 
