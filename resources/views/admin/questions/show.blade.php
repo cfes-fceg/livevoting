@@ -4,7 +4,7 @@
 
     <div class="card card-default">
         <div class="card-header clearfix">
-            <span class="pull-left">
+            <span>
                 <h4 class="mt-4 mb-4">{{ isset($question->title) ? $question->title : 'Question' }}</h4>
             </span>
 
@@ -48,7 +48,7 @@
                         </a>
 
                         <button type="submit" class="btn btn-danger" title="Delete Question"
-                                onclick="return confirm(&quot;Click Ok to delete Question.?&quot;)">
+                                onclick="return confirm('Click Ok to delete Question.?')">
                             Delete
                         </button>
                     </div>

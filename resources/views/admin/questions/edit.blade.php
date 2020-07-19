@@ -6,7 +6,7 @@
 
         <div class="card-header clearfix">
 
-            <div class="pull-left">
+            <div>
                 <h4 class="mt-4 mb-4">{{ !empty($question->title) ? $question->title : 'Question' }}</h4>
             </div>
             <div class="btn-group btn-group-md float-right" role="group">
