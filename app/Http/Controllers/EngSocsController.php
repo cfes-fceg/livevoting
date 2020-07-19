@@ -6,9 +6,7 @@ use App\EngSoc;
 use App\User;
 use App\Role\UserRole;
 use Exception;
-use http\Env\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class EngSocsController extends Controller
 {
@@ -20,7 +18,7 @@ class EngSocsController extends Controller
      */
     public function index()
     {
-        $engSocs = EngSoc::paginate(25);
+        $engSocs = EngSoc::orderBy('name', 'asc')->paginate(25);
         $voters = User::where('roles', 'like', '%'.UserRole::ROLE_VOTER.'%')->get();
 
         return view('admin.eng_socs.index', compact('engSocs'), compact('voters'));
