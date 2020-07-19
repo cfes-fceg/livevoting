@@ -3,7 +3,6 @@
 @section('content')
 @if(Session::has('success_message'))
 <div class="alert alert-success">
-    <span class="glyphicon glyphicon-ok"></span>
     {!! session('success_message') !!}
 
     <button type="button" class="close" data-dismiss="alert" aria-label="close">
@@ -13,15 +12,15 @@
 </div>
 @endif
 
-<div class="panel panel-default">
+<div class="card">
 
-    <div class="panel-heading clearfix">
+    <div class="card-header clearfix">
 
-        <div class="pull-left">
-            <h4 class="mt-5 mb-5">Engineering Societies</h4>
+        <div>
+            <h4 class="mt-4 mb-4">Engineering Societies</h4>
         </div>
 
-        <div class="btn-group btn-group-sm pull-right" role="group">
+        <div class="btn-group btn-group-md float-right" role="group">
             <a href="{{ route('eng_socs.eng_soc.create') }}" class="btn btn-success" title="Create New Eng Soc">
                 Create new EngSoc
             </a>
@@ -30,11 +29,11 @@
     </div>
 
     @if(count($engSocs) == 0)
-    <div class="panel-body text-center">
+    <div class="card-body text-center">
         <h4>No Engineering Societies Available.</h4>
     </div>
     @else
-    <div class="panel-body panel-body-with-table">
+    <div class="card-body p-0">
         <div class="table-responsive" style="overflow-x: unset">
 
             <table class="table table-striped ">
@@ -68,7 +67,7 @@
                                 </a>
 
                                 <button type="submit" class="btn btn-danger" title="Delete Eng Soc"
-                                        onclick="return confirm(&quot;Click Ok to delete Eng Soc.&quot;)">
+                                        onclick="return confirm('Click Ok to delete Eng Soc.')">
                                     Delete
                                 </button>
                             </div>
@@ -84,7 +83,7 @@
         </div>
     </div>
 
-    <div class="panel-footer">
+    <div class="panel-footer pl-4">
         {!! $engSocs->render() !!}
     </div>
 
