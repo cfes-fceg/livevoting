@@ -23,6 +23,7 @@ class CreateVotesTable extends Migration
             $table->foreign('voter_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('eng_soc_id')->references('id')->on('eng_socs')->onDelete('restrict');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('restrict');
+            $table->unique(['eng_soc_id', 'question_id'], 'eng_soc_question_unique');
         });
     }
 
