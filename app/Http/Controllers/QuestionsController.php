@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Question;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class QuestionsController extends Controller
 {
@@ -104,10 +105,10 @@ class QuestionsController extends Controller
             $question = Question::findOrFail($id);
             $question->update($data);
 
-            return redirect()->route('questions.question.index')
+            return redirect()->route('questions.question.show', $question->id)
                 ->with('success_message', 'Question was successfully updated.');
         } catch (Exception $exception) {
-
+            Log::error($exception);
             return back()->withInput()
                 ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request.']);
         }

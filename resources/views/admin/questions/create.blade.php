@@ -2,23 +2,23 @@
 
 @section('content')
 
-    <div class="panel panel-default">
+    <div class="card card-default">
 
-        <div class="panel-heading clearfix">
+        <div class="card-header clearfix">
 
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Question</h4>
+                <h4 class="mt-4 mb-4">Create New Question</h4>
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('questions.question.index') }}" class="btn btn-primary" title="Show All Question">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Show all
+                    Show all
                 </a>
             </div>
 
         </div>
 
-        <div class="panel-body">
+        <div class="card-body">
 
             @if ($errors->any())
                 <ul class="alert alert-danger">
