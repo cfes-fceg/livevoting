@@ -11,6 +11,6 @@ class EngSocsSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\EngSoc::class, 50)->create();
+        factory(\App\EngSoc::class, 50)->create();
     }
 }

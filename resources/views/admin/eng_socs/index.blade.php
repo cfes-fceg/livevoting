@@ -23,7 +23,7 @@
 
         <div class="btn-group btn-group-sm pull-right" role="group">
             <a href="{{ route('eng_socs.eng_soc.create') }}" class="btn btn-success" title="Create New Eng Soc">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create new EngSoc
+                Create new EngSoc
             </a>
         </div>
 
@@ -35,7 +35,7 @@
     </div>
     @else
     <div class="panel-body panel-body-with-table">
-        <div class="table-responsive">
+        <div class="table-responsive" style="overflow-x: unset">
 
             <table class="table table-striped ">
                 <thead>
@@ -44,7 +44,7 @@
                     <th>Location</th>
                     <th>Voting Representative</th>
 
-                    <th></th>
+                    <th> </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,10 +52,10 @@
                 <tr>
                     <td>{{ $engSoc->name }}</td>
                     <td>{{ $engSoc->location }}</td>
-                    <td>{{ $engSoc->votingRepresentative }}</td>
-
                     <td>
-
+                        <div class="voter-select" id="{{ 'voter-select'.$engSoc->id }}" data="{{ json_encode([ "engSoc" => $engSoc, "options" => $voters, "selected" => $engSoc->voter ]) }}"></div>
+                    </td>
+                    <td>
                         <form method="POST" action="{!! route('eng_socs.eng_soc.destroy', $engSoc->id) !!}"
                               accept-charset="UTF-8">
                             <input name="_method" value="DELETE" type="hidden">

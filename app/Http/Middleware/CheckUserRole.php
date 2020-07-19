@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
+use App\User;
 use App\Role\RoleChecker;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;

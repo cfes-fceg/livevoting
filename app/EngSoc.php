@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+/**
+ * Class EngSoc
+ * @package App\Models
+ */
+class EngSoc extends Model
 {
-    
+
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'questions';
+    protected $table = 'eng_socs';
 
     /**
     * The database primary key value.
@@ -28,8 +32,8 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-                  'title',
-                  'is_active'
+                  'name',
+                  'location',
               ];
 
     /**
@@ -38,15 +42,24 @@ class Question extends Model
      * @var array
      */
     protected $dates = [];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [];
-    
 
+    /**
+     * Get the post that owns the comment.
+     */
+    public function voter()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    public function votes() {
+        return $this->hasMany(Vote::class);
+    }
 
 }

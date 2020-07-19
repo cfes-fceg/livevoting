@@ -13,4 +13,5 @@ require('./bootstrap');
  */
 
 require('./components/Example');
-require('./components/VoterPanel');
+require('./components/Ballot');
+require('./components/VoterSelect');

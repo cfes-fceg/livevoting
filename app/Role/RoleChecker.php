@@ -2,7 +2,7 @@
 
 namespace App\Role;
 
-use App\Models\User;
+use App\User;
 
 /**
  * Class RoleChecker

@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
-import {BALLOT_OPTIONS, VoteButton} from './vote-button'
+import {BALLOT_OPTIONS, VoteButton} from './vote-button';
+import axios from 'axios';
 
-function VoterPanel({dataString, classes}) {
+function Ballot({dataString, classes}) {
     const [question, setQuestion] = useState({});
     const [engSocs, setEngSocs] = useState([]);
     const [error, setError] = useState("");
+
+    const [votingEnabled, setVotingEnabled] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -15,6 +18,12 @@ function VoterPanel({dataString, classes}) {
                 //     id: data.id,
                 //     title: data.title,
                 // })
+                axios.get('/api/user').then(response => {
+                    console.log("response", response);
+                }).catch(error => {
+                    console.log("error", error);
+                });
+
                 let question = {
                     id: 69,
                     title: 'How do you vote on the current motion?'
@@ -67,11 +76,20 @@ function VoterPanel({dataString, classes}) {
                             {engSocs.map((engSoc, index) => {
                                 return <li key={index} className="list-group-item">
                                     {engSoc.name}
-                                    <VoteButton value={engSoc.vote} rootClass={"float-right"}/>
+                                    <VoteButton value={engSoc.vote}
+                                                disabled={!votingEnabled}
+                                                rootClass={"float-right"}/>
                                 </li>
                             })}
 
                         </ul>
+                        {votingEnabled &&
+                        <div className="card-body">
+                            <button className={"btn float-right btn-primary"}>
+                                {engSocs.length > 1 ? 'Cast votes' : 'Cast vote'}
+                            </button>
+                        </div>
+                        }
                     </div>
                     }
                 </div>
@@ -80,11 +98,11 @@ function VoterPanel({dataString, classes}) {
     );
 }
 
-export default VoterPanel;
+export default Ballot;
 
 if (document.getElementById('voter-panel')) {
     let domObj = document.getElementById('voter-panel');
     let data = domObj.getAttribute('data');
     let classes = domObj.getAttribute('class');
-    ReactDOM.render(<VoterPanel dataString={data} classes={classes}/>, document.getElementById('voter-panel'));
+    ReactDOM.render(<Ballot dataString={data} classes={classes}/>, document.getElementById('voter-panel'));
 }
