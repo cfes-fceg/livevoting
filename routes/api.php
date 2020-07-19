@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'middleware' => ['auth:api']
+], function () {
+    Route::apiResource('vote', 'VoteController');
+    Route::put('/engsocs/{id}', 'EngSocsController@apiUpdate');
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
 
 

@@ -9,13 +9,15 @@ export const BALLOT_OPTIONS = {
     UNSET: 'UNSET'
 }
 
-export function VoteButton({value, onChange, rootClass}) {
+export function VoteButton({value, onChange, rootClass, disabled}) {
     const [ballotValue, setBallotValue] = useState(value || BALLOT_OPTIONS.UNSET)
 
     function onRadioChange(e) {
-        setBallotValue(e.target.value);
-        if (onChange) {
-            onChange(e);
+        if (!disabled) {
+            setBallotValue(e.target.value);
+            if (onChange) {
+                onChange(e);
+            }
         }
     }
 

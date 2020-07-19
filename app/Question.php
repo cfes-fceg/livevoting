@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class EngSoc
- * @package App\Models
- */
-class EngSoc extends Model
+class Question extends Model
 {
 
 
@@ -17,7 +13,7 @@ class EngSoc extends Model
      *
      * @var string
      */
-    protected $table = 'eng_socs';
+    protected $table = 'questions';
 
     /**
     * The database primary key value.
@@ -32,8 +28,8 @@ class EngSoc extends Model
      * @var array
      */
     protected $fillable = [
-                  'name',
-                  'location',
+                  'title',
+                  'is_active'
               ];
 
     /**
@@ -50,16 +46,7 @@ class EngSoc extends Model
      */
     protected $casts = [];
 
-    /**
-     * Get the post that owns the comment.
-     */
-    public function votingRepresentative()
-    {
-        return $this->belongsTo(User::class);
-    }
 
-    public function votes() {
-        return $this->hasMany(Vote::class);
-    }
+
 
 }
