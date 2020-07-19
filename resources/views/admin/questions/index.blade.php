@@ -4,7 +4,6 @@
 
     @if(Session::has('success_message'))
         <div class="alert alert-success">
-            <span class="glyphicon glyphicon-ok"></span>
             {!! session('success_message') !!}
 
             <button type="button" class="close" data-dismiss="alert" aria-label="close">
@@ -14,15 +13,15 @@
         </div>
     @endif
 
-    <div class="panel panel-default">
+    <div class="card card-default">
 
-        <div class="panel-heading clearfix">
+        <div class="card-header clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">Questions</h4>
+                <h4 class="mt-4 mb-4">Questions</h4>
             </div>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
+            <div class="btn-group btn-group-md float-right" role="group">
                 <a href="{{ route('questions.question.create') }}" class="btn btn-success" title="Create New Question">
                     Create New Question
                 </a>
@@ -31,27 +30,33 @@
         </div>
 
         @if(count($questions) == 0)
-            <div class="panel-body text-center">
+            <div class="card-body text-center">
                 <h4>No Questions Available.</h4>
             </div>
         @else
-        <div class="panel-body panel-body-with-table">
+        <div class="card-body p-0">
             <div class="table-responsive">
 
                 <table class="table table-striped ">
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Is Active</th>
+                            <th>Status</th>
 
-                            <th></th>
+                            <th style="text-align: right;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($questions as $question)
                         <tr>
                             <td>{{ $question->title }}</td>
-                            <td>{{ ($question->is_active) ? 'Yes' : 'No' }}</td>
+                            <td>
+                                @if($question->is_active)
+                                    <h4><span class="badge badge-success badge-pill">Active</span></h4>
+                                @else
+                                    <h4><span class="badge badge-secondary badge-pill">Closed</span></h4>
+                                @endif
+                            </td>
 
                             <td>
 
@@ -59,16 +64,16 @@
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
-                                    <div class="btn-group btn-group-xs pull-right" role="group">
+                                    <div class="btn-group btn-group-xs float-right" role="group">
                                         <a href="{{ route('questions.question.show', $question->id ) }}" class="btn btn-info" title="Show Question">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>Show
+                                            Show
                                         </a>
                                         <a href="{{ route('questions.question.edit', $question->id ) }}" class="btn btn-primary" title="Edit Question">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit
+                                            Edit
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete Question" onclick="return confirm(&quot;Click Ok to delete Question.&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete
+                                            Delete
                                         </button>
                                     </div>
 
@@ -83,7 +88,7 @@
             </div>
         </div>
 
-        <div class="panel-footer">
+        <div class="panel-footer pl-4">
             {!! $questions->render() !!}
         </div>
 

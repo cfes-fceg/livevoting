@@ -1,23 +1,27 @@
-
-<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-    <label for="title" class="col-md-2 control-label">Title</label>
-    <div class="col-md-10">
-        <input class="form-control" name="title" type="text" id="title" value="{{ old('title', optional($question)->title) }}" minlength="1" maxlength="255" placeholder="Enter title here...">
+<div class="form-row">
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Title: </span>
+            </div>
+            <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" type="text" id="title"
+                   value="{{ old('title', optional($question)->title) }}" minlength="1" maxlength="255"
+                   placeholder="Enter title here...">
+        </div>
         {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
     </div>
-</div>
-
-<div class="form-group {{ $errors->has('is_active') ? 'has-error' : '' }}">
-    <label for="is_active" class="col-md-2 control-label">Is Active</label>
-    <div class="col-md-10">
-        <div class="checkbox">
-            <label for="is_active_1">
-            	<input id="is_active_1" class="" name="is_active" type="checkbox" value="1" {{ old('is_active', optional($question)->is_active) == '1' ? 'checked' : '' }}>
-                Yes
-            </label>
+    <div class="col">
+        <div class="input-group mb-3 is-invalid">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Status: </span>
+            </div>
+            @if(old('is_active', optional($question)->is_active) == 1)
+                <input type="hidden" value="1" name="is_active"/>
+                <button class="btn btn-success" disabled>Active</button>
+            @else
+                <button class="btn btn-danger" disabled>Closed</button>
+            @endif
         </div>
-
         {!! $errors->first('is_active', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-
