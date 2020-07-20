@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class VoterController extends Controller
@@ -29,7 +30,11 @@ class VoterController extends Controller
 
         $engSocs = $request->user()->engSocs->all();
         if (count($engSocs) > 0) {
-            $questions = Question::where('is_active', true)->get();
+            $questions = Question::whereDoesntHave('votes', function (Builder $query) use ($engSocs) {
+                    $query->whereIn('eng_soc_id', array_map(function ($engSoc) {
+                        return $engSoc->id;
+                    }, $engSocs));
+                })->where('is_active', true)->get();
             return response()->json($questions, 200);
         } else {
             return abort(403, 'User must be the voting member of at least one EngSoc');
