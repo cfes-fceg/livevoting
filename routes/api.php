@@ -21,7 +21,7 @@ Route::group([
     Route::group([
         'middleware' => ['check_user_role:' . UserRole::ROLE_VOTER]
     ], function() {
-        Route::apiResource('vote', 'VoteController');
+        Route::post('/questions/{question}/votes', 'VoterController@castBallot');
     });
 
     Route::group([
