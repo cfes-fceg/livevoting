@@ -59,7 +59,7 @@ class EngSoc extends Model
     }
 
     public function votes() {
-        return $this->hasMany(Vote::class);
+        return $this->hasMany(Vote::class, 'eng_soc_id');
     }
 
 }
