@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@voterHome')->middleware(['auth', 'check_user_role:' . UserRole::ROLE_VOTER])->name('voter.home');
+Route::get('/home', 'VoterController@index')->middleware(['auth', 'check_user_role:' . UserRole::ROLE_VOTER])->name('voter.home');
 
 Route::group([
     'prefix' => 'vote',
@@ -36,7 +36,6 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth','check_user_role:' . UserRole::ROLE_ADMIN]
 ], function(){
-    Route::get('/', 'HomeController@adminHome')->name('admin.home');
 
     Route::group([
         'prefix' => 'engsocs',

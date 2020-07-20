@@ -105,7 +105,7 @@ class User extends Authenticatable
      *
      */
     public function engSocs() {
-        return $this->hasMany(EngSoc::class);
+        return $this->hasMany(EngSoc::class, 'voter_id');
     }
 
     public function votes() {
