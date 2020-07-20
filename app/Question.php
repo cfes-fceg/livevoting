@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-
-
     /**
      * The database table used by the model.
      *
@@ -16,10 +14,10 @@ class Question extends Model
     protected $table = 'questions';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -28,9 +26,9 @@ class Question extends Model
      * @var array
      */
     protected $fillable = [
-                  'title',
-                  'is_active'
-              ];
+        'title',
+        'is_active'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -46,7 +44,10 @@ class Question extends Model
      */
     protected $casts = [];
 
-
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'question_id');
+    }
 
 
 }
