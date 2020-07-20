@@ -55,7 +55,7 @@ class EngSoc extends Model
      */
     public function voter()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'voter_id');
     }
 
     public function votes() {

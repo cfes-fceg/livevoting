@@ -6,7 +6,7 @@ export const BALLOT_OPTIONS = {
     FOR: 'FOR',
     AGAINST: 'AGAINST',
     ABSTAIN: 'ABSTAIN',
-    UNSET: 'UNSET'
+    UNSET: null
 }
 
 export function VoteButton({value, onChange, rootClass, disabled}) {
