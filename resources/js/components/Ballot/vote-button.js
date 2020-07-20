@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const BALLOT_OPTIONS = {
     FOR: 'FOR',
@@ -16,7 +16,7 @@ export function VoteButton({value, onChange, rootClass, disabled}) {
         if (!disabled) {
             setBallotValue(e.target.value);
             if (onChange) {
-                onChange(e);
+                onChange(e.target.value);
             }
         }
     }
