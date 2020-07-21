@@ -53,6 +53,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "mfs" : [
+            "@php artisan migrate:fresh --seed"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
