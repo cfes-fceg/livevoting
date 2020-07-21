@@ -2,6 +2,23 @@
 
 use Illuminate\Support\Str;
 
+$username = null;
+$host = null;
+$password = null;
+$database = null;
+
+if (env("CLEARDB_DATABASE_URL", '') || env('JAWSDB_URL', '')) {
+    $url = env("CLEARDB_DATABASE_URL", '') ?: env('JAWSDB_URL', '');
+    if ($url) {
+        $parsedUrl = parse_url($url);
+
+        $host = $parsedUrl["host"];
+        $username = $parsedUrl["user"];
+        $password = $parsedUrl["pass"];
+        $database = substr($parsedUrl["path"], 1);
+    }
+}
+
 return [
 
     /*
@@ -46,11 +63,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => $host ?: env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => $database ?: env('DB_DATABASE', 'forge'),
+            'username' => $username ?: env('DB_USERNAME', 'forge'),
+            'password' => $password ?: env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -123,7 +140,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
