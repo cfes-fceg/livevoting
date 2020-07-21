@@ -48,7 +48,7 @@ function VoterSelect({dataString, id}) {
 
     return (
 
-        <div className="input-group mb-3">
+        <div className="input-group" style={{'flex-wrap': 'unset'}}>
             <Typeahead id={id}
                        labelKey={option => `${option.name}`}
                        filterBy={["name", 'email']}
