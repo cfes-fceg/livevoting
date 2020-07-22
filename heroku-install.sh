@@ -5,5 +5,3 @@ if [ $APP_ENV == 'local' ] || [ $APP_ENV == 'staging'  ] ; then
 else
     php artisan migrate
 fi
-
-php artisan passport:keys

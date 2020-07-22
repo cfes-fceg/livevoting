@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 return [
 
     /*
@@ -13,9 +15,9 @@ return [
     |
     */
 
-    'private_key' => (in_array(env('APP_ENV'), ['prod', 'staging', 'production'])) ? env('PASSPORT_PRIVATE_KEY') : file('/storage/oauth-private.key'),
+    'private_key' => env('PASSPORT_PRIVATE_KEY') ,
 
-    'public_key' => (in_array(env('APP_ENV'), ['prod', 'staging', 'production'])) ? env('PASSPORT_PUBLIC_KEY') : file('/storage/oauth-private.key'),
+    'public_key' => env('PASSPORT_PUBLIC_KEY'),
 
     /*
     |--------------------------------------------------------------------------
