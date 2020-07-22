@@ -6,4 +6,4 @@ else
     php artisan migrate
 fi
 
-php artisan passport:install
+php artisan passport:keys
