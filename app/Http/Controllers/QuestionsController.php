@@ -51,7 +51,7 @@ class QuestionsController extends Controller
 
             Question::create($data);
 
-            return redirect()->route('questions.question.index')
+            return redirect()->route('admin.questions')
                 ->with('success_message', 'Question was successfully added.');
         } catch (Exception $exception) {
 
@@ -106,7 +106,7 @@ class QuestionsController extends Controller
             $question = Question::findOrFail($id);
             $question->update($data);
 
-            return redirect()->route('questions.question.show', $question->id)
+            return redirect()->route('admin.questions.show', $question->id)
                 ->with('success_message', 'Question was successfully updated.');
         } catch (Exception $exception) {
             Log::error($exception);
@@ -128,7 +128,7 @@ class QuestionsController extends Controller
             $question = Question::findOrFail($id);
             $question->delete();
 
-            return redirect()->route('questions.question.index')
+            return redirect()->route('admin.questions')
                 ->with('success_message', 'Question was successfully deleted.');
         } catch (Exception $exception) {
 

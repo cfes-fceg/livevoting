@@ -11,11 +11,11 @@
             </div>
             <div class="btn-group btn-group-md float-right" role="group">
 
-                <a href="{{ route('questions.question.index') }}" class="btn btn-primary" title="Show All Question">
+                <a href="{{ route('admin.questions') }}" class="btn btn-primary" title="Show All Question">
                     Show all
                 </a>
 
-                <a href="{{ route('questions.question.create') }}" class="btn btn-success" title="Create New Question">
+                <a href="{{ route('admin.questions.create') }}" class="btn btn-success" title="Create New Question">
                     New
                 </a>
 

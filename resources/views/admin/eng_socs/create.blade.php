@@ -11,7 +11,7 @@
             </span>
 
             <div class="btn-group btn-group-md float-right" role="group">
-                <a href="{{ route('eng_socs.eng_soc.index') }}" class="btn btn-primary" title="Show All Eng Soc">
+                <a href="{{ route('admin.engsocs') }}" class="btn btn-primary" title="Show All Eng Soc">
                     Show all
                 </a>
             </div>
@@ -28,7 +28,7 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('eng_socs.eng_soc.store') }}" accept-charset="UTF-8"
+            <form method="POST" action="{{ route('admin.engsocs.store') }}" accept-charset="UTF-8"
                   id="create_eng_soc_form" name="create_eng_soc_form" class="form-horizontal">
                 {{ csrf_field() }}
                 @include ('admin.eng_socs.form', [

@@ -11,7 +11,7 @@
             </span>
 
             <div class="btn-group btn-group-md float-right" role="group">
-                <a href="{{ route('questions.question.index') }}" class="btn btn-primary" title="Show All Question">
+                <a href="{{ route('admin.questions') }}" class="btn btn-primary" title="Show All Question">
                     Show all
                 </a>
             </div>
@@ -28,7 +28,7 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('questions.question.store') }}" accept-charset="UTF-8"
+            <form method="POST" action="{{ route('admin.questions.store') }}" accept-charset="UTF-8"
                   id="create_question_form" name="create_question_form" class="form-horizontal">
                 {{ csrf_field() }}
                 @include ('admin.questions.form', [

@@ -22,7 +22,7 @@
             </div>
 
             <div class="btn-group btn-group-md float-right" role="group">
-                <a href="{{ route('questions.question.create') }}" class="btn btn-success" title="Create New Question">
+                <a href="{{ route('admin.questions.create') }}" class="btn btn-success" title="Create New Question">
                     Create New Question
                 </a>
             </div>
@@ -60,15 +60,15 @@
 
                             <td>
 
-                                <form method="POST" action="{!! route('questions.question.destroy', $question->id) !!}" accept-charset="UTF-8">
+                                <form method="POST" action="{!! route('admin.questions.destroy', $question->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
                                     <div class="btn-group btn-group-xs float-right" role="group">
-                                        <a href="{{ route('questions.question.show', $question->id ) }}" class="btn btn-info" title="Show Question">
+                                        <a href="{{ route('admin.questions.show', $question->id ) }}" class="btn btn-info" title="Show Question">
                                             Show
                                         </a>
-                                        <a href="{{ route('questions.question.edit', $question->id ) }}" class="btn btn-primary" title="Edit Question">
+                                        <a href="{{ route('admin.questions.edit', $question->id ) }}" class="btn btn-primary" title="Edit Question">
                                             Edit
                                         </a>
 
