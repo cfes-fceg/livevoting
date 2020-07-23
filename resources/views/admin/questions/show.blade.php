@@ -27,22 +27,22 @@
             </div>
 
             <div class="float-right d-inline-block">
-                <form method="POST" action="{!! route('questions.question.destroy', $question->id) !!}"
+                <form method="POST" action="{!! route('admin.questions.destroy', $question->id) !!}"
                       accept-charset="UTF-8">
                     <input name="_method" value="DELETE" type="hidden">
                     {{ csrf_field() }}
                     <div class="btn-group btn-group-md" role="group">
-                        <a href="{{ route('questions.question.index') }}" class="btn btn-primary"
+                        <a href="{{ route('admin.questions') }}" class="btn btn-primary"
                            title="Show All Question">
                             Show all
                         </a>
 
-                        <a href="{{ route('questions.question.create') }}" class="btn btn-success"
+                        <a href="{{ route('admin.questions.create') }}" class="btn btn-success"
                            title="Create New Question">
                             New
                         </a>
 
-                        <a href="{{ route('questions.question.edit', $question->id ) }}" class="btn btn-primary"
+                        <a href="{{ route('admin.questions.edit', $question->id ) }}" class="btn btn-primary"
                            title="Edit Question">
                             Edit
                         </a>

@@ -21,7 +21,7 @@
         </div>
 
         <div class="btn-group btn-group-md float-right" role="group">
-            <a href="{{ route('eng_socs.eng_soc.create') }}" class="btn btn-success" title="Create New Eng Soc">
+            <a href="{{ route('admin.engsocs.create') }}" class="btn btn-success" title="Create New Eng Soc">
                 Create new EngSoc
             </a>
         </div>
@@ -55,13 +55,13 @@
                         <div class="voter-select" id="{{ 'voter-select'.$engSoc->id }}" data="{{ json_encode([ "engSoc" => $engSoc, "options" => $voters, "selected" => $engSoc->voter ]) }}"></div>
                     </td>
                     <td>
-                        <form method="POST" action="{!! route('eng_socs.eng_soc.destroy', $engSoc->id) !!}"
+                        <form method="POST" action="{!! route('admin.engsocs.destroy', $engSoc->id) !!}"
                               accept-charset="UTF-8">
                             <input name="_method" value="DELETE" type="hidden">
                             {{ csrf_field() }}
 
                             <div class="btn-group btn-group-xs pull-right" role="group">
-                                <a href="{{ route('eng_socs.eng_soc.edit', $engSoc->id ) }}" class="btn btn-primary"
+                                <a href="{{ route('admin.engsocs.edit', $engSoc->id ) }}" class="btn btn-primary"
                                    title="Edit Eng Soc">
                                     Edit
                                 </a>

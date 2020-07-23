@@ -51,7 +51,7 @@ class EngSocsController extends Controller
 
             EngSoc::create($data);
 
-            return redirect()->route('eng_socs.eng_soc.index')
+            return redirect()->route('admin.engsocs')
                 ->with('success_message', 'Eng Soc was successfully added.');
         } catch (Exception $exception) {
 
@@ -106,7 +106,7 @@ class EngSocsController extends Controller
             $engSoc = EngSoc::findOrFail($id);
             $engSoc->update($data);
 
-            return redirect()->route('eng_socs.eng_soc.index')
+            return redirect()->route('admin.engsocs')
                 ->with('success_message', 'Eng Soc was successfully updated.');
         } catch (Exception $exception) {
 
@@ -164,7 +164,7 @@ class EngSocsController extends Controller
             $engSoc = EngSoc::findOrFail($id);
             $engSoc->delete();
 
-            return redirect()->route('eng_socs.eng_soc.index')
+            return redirect()->route('admin.engsocs')
                 ->with('success_message', 'Eng Soc was successfully deleted.');
         } catch (Exception $exception) {
 

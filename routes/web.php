@@ -16,61 +16,77 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $user = Auth::user();
+    if ($user) {
+        if ($user->hasRole(UserRole::ROLE_ADMIN)) {// do your magic here
+            return redirect()->route('admin.home');
+        } else if ($user->hasRole(UserRole::ROLE_VOTER)) {
+            return redirect()->route('voter.home');
+        }
+    }
     return view('welcome');
 });
 
 
-Auth::routes();
+//Auth::routes();
+
+//Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::POST('login', 'Auth\LoginController@login')->name('login');
+Route::POST('logout', 'Auth\LoginController@logout')->name('logout');
+Route::POST('password/confirm', 'Auth\ConfirmPasswordController@confirm');
+Route::GET('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+Route::POST('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::GET('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::POST('register', 'Auth\RegisterController@register')->name('register');
+//Route::GET('register', 'Auth\RegisterController@showRegistrationForm');
 
 Route::get('/home', 'VoterController@index')->middleware(['auth', 'check_user_role:' . UserRole::ROLE_VOTER])->name('voter.home');
 
 Route::group([
-    'prefix' => 'vote',
-    'middleware' => ['auth','check_user_role:' . UserRole::ROLE_VOTER]
-], function(){
-    Route::get('/', 'EngSocsController@index')
-        ->name('eng_socs.eng_soc.index');
-});
-
-Route::group([
     'prefix' => 'admin',
-    'middleware' => ['auth','check_user_role:' . UserRole::ROLE_ADMIN]
-], function(){
+    'middleware' => ['auth', 'check_user_role:' . UserRole::ROLE_ADMIN]
+], function () {
+
+    Route::get('/', function () {
+        return view('admin.home');
+    })->name('admin.home');
 
     Route::group([
         'prefix' => 'engsocs',
     ], function () {
         Route::get('/', 'EngSocsController@index')
-            ->name('eng_socs.eng_soc.index');
-        Route::get('/create','EngSocsController@create')
-            ->name('eng_socs.eng_soc.create');
-        Route::get('/{engSoc}/edit','EngSocsController@edit')
-            ->name('eng_socs.eng_soc.edit')->where('id', '[0-9]+');
+            ->name('admin.engsocs');
+        Route::get('/create', 'EngSocsController@create')
+            ->name('admin.engsocs.create');
+        Route::get('/{engSoc}/edit', 'EngSocsController@edit')
+            ->name('admin.engsocs.edit')->where('id', '[0-9]+');
         Route::post('/', 'EngSocsController@store')
-            ->name('eng_socs.eng_soc.store');
+            ->name('admin.engsocs.store');
         Route::put('eng_soc/{engSoc}', 'EngSocsController@update')
-            ->name('eng_socs.eng_soc.update')->where('id', '[0-9]+');
-        Route::delete('/eng_soc/{engSoc}','EngSocsController@destroy')
-            ->name('eng_socs.eng_soc.destroy')->where('id', '[0-9]+');
+            ->name('admin.engsocs.update')->where('id', '[0-9]+');
+        Route::delete('/eng_soc/{engSoc}', 'EngSocsController@destroy')
+            ->name('admin.engsocs.destroy')->where('id', '[0-9]+');
     });
 
     Route::group([
         'prefix' => 'questions',
     ], function () {
         Route::get('/', 'QuestionsController@index')
-            ->name('questions.question.index');
-        Route::get('/create','QuestionsController@create')
-            ->name('questions.question.create');
-        Route::get('/show/{question}','QuestionsController@show')
-            ->name('questions.question.show')->where('id', '[0-9]+');
-        Route::get('/{question}/edit','QuestionsController@edit')
-            ->name('questions.question.edit')->where('id', '[0-9]+');
+            ->name('admin.questions');
+        Route::get('/create', 'QuestionsController@create')
+            ->name('admin.questions.create');
+        Route::get('/show/{question}', 'QuestionsController@show')
+            ->name('admin.questions.show')->where('id', '[0-9]+');
+        Route::get('/{question}/edit', 'QuestionsController@edit')
+            ->name('admin.questions.edit')->where('id', '[0-9]+');
         Route::post('/', 'QuestionsController@store')
-            ->name('questions.question.store');
+            ->name('admin.questions.store');
         Route::put('question/{question}', 'QuestionsController@update')
             ->name('questions.question.update')->where('id', '[0-9]+');
-        Route::delete('/question/{question}','QuestionsController@destroy')
-            ->name('questions.question.destroy')->where('id', '[0-9]+');
+        Route::delete('/question/{question}', 'QuestionsController@destroy')
+            ->name('admin.questions.destroy')->where('id', '[0-9]+');
     });
 
 });

@@ -11,11 +11,11 @@
             </div>
             <div class="btn-group btn-group-md float-right" role="group">
 
-                <a href="{{ route('eng_socs.eng_soc.index') }}" class="btn btn-primary" title="Show All Eng Soc">
+                <a href="{{ route('admin.engsocs') }}" class="btn btn-primary" title="Show All Eng Soc">
                     Show All
                 </a>
 
-                <a href="{{ route('eng_socs.eng_soc.create') }}" class="btn btn-success" title="Create New Eng Soc">
+                <a href="{{ route('admin.engsocs.create') }}" class="btn btn-success" title="Create New Eng Soc">
                     New
                 </a>
 
@@ -32,7 +32,7 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('eng_socs.eng_soc.update', $engSoc->id) }}" id="edit_eng_soc_form"
+            <form method="POST" action="{{ route('admin.engsocs.update', $engSoc->id) }}" id="edit_eng_soc_form"
                   name="edit_eng_soc_form" accept-charset="UTF-8" class="form-horizontal">
                 {{ csrf_field() }}
                 <input name="_method" type="hidden" value="PUT">
