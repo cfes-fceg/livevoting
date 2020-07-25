@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Vote;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -159,15 +160,21 @@ class QuestionsController extends Controller
         return $data;
     }
 
-    protected function getResults(Question $question) {
+    protected function getResults(Question $question)
+    {
         $results = $question->votes()->select('vote', DB::raw('count(*) as total'))->groupBy('vote')->get();
         $response = [];
         $total = 0;
-        foreach ($results as $result) {
-            $total += $result->total;
-            $response[$result->vote] = $result->total;
-        }
-        $response['TOTAL'] = $total;
+        if (count($results) > 0)
+            foreach ($results as $result) {
+                $total += $result->total;
+                $response[$result->vote] = $result->total;
+            }
+        else
+            foreach (Vote::OPTIONS as $option) {
+                $response[$option] = 0;
+            }
+        $response['total'] = $total;
 
         return response()->json($response);
     }
