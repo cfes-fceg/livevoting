@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class QuestionsController extends Controller
@@ -156,6 +157,19 @@ class QuestionsController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         return $data;
+    }
+
+    protected function getResults(Question $question) {
+        $results = $question->votes()->select('vote', DB::raw('count(*) as total'))->groupBy('vote')->get();
+        $response = [];
+        $total = 0;
+        foreach ($results as $result) {
+            $total += $result->total;
+            $response[$result->vote] = $result->total;
+        }
+        $response['TOTAL'] = $total;
+
+        return response()->json($response);
     }
 
 }

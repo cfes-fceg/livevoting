@@ -16,3 +16,4 @@ require('./bootstrap');
 require('./components/VotingBooth');
 require('./components/Ballot');
 require('./components/VoterSelect');
+require('./components/ResultsViewer');
