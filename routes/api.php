@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/questions/{question}/results','QuestionsController@getResults');
 
 Route::group([
     'middleware' => ['auth:api']
@@ -31,6 +30,7 @@ Route::group([
         'middleware' => ['check_user_role:' . UserRole::ROLE_ADMIN]
     ], function() {
         Route::put('/engsocs/{id}', 'EngSocsController@apiUpdate');
+        Route::get('/questions/{question}/results','QuestionsController@getResults');
     });
 
     Route::get('/questions/active', 'VoterController@getActiveQuestions');

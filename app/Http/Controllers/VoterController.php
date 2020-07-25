@@ -38,7 +38,7 @@ class VoterController extends Controller
             })->where('is_active', true)->get();
             return response()->json($questions, 200);
         } else {
-            return abort(403, 'User must be the voting member of at least one EngSoc');
+            return abort(403, 'You must be the voting member of at least one EngSoc');
         }
     }
 
