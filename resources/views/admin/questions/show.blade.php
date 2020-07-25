@@ -58,9 +58,9 @@
 
         </div>
 
-        <div class="card-body">
-            <p>Coming soon</p>
-        </div>
+
+        <div class="row m-0" id="results-viewer" data="{{ json_encode(['question' => $question]) }}"></div>
+
     </div>
 
 @endsection

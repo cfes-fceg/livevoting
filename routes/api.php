@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/questions/{question}/results','QuestionsController@getResults');
+
 Route::group([
     'middleware' => ['auth:api']
 ], function () {
@@ -35,6 +38,5 @@ Route::group([
         return $request->user();
     });
 });
-
 
 
