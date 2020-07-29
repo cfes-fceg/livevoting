@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,19 +16,19 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-<div id="app">
+<body class="d-flex flex-column h-100">
+<header>
     @include('nav')
-    @include('no-save-warning')
+</header>
+@include('no-save-warning')
 
-    <main class="py-4">
-        <div class="container">
-            @yield('content')
-        </div>
-    </main>
+<main class="py-4 flex-shrink-0">
+    <div class="container">
+        @yield('content')
+    </div>
+</main>
 
-    @include('footer')
-</div>
+@include('footer')
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

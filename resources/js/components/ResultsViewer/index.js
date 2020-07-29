@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import ReactDOM from 'react-dom';
-import {HorizontalGridLines, VerticalBarSeries, VerticalGridLines, XAxis, XYPlot, YAxis} from 'react-vis';
 import axios from "axios";
+import {ResultGraph} from "../ResultGraph";
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -25,7 +25,6 @@ function useInterval(callback, delay) {
 }
 
 function ResultsViewer({dataString, className}) {
-    const [graphData, setGraphData] = useState([]);
     const [question, setQuestion] = useState(null);
     const [error, setError] = useState("");
     const [data, setData] = useState(null);
@@ -63,7 +62,6 @@ function ResultsViewer({dataString, className}) {
     }, [dataString])
 
     useEffect(() => {
-        setGraphData(getGraphData(data))
         setIsInitialized(true);
     }, [data])
 
@@ -86,15 +84,6 @@ function ResultsViewer({dataString, className}) {
         }
     }
 
-    function getGraphData(data) {
-        if (data)
-            return [
-                {x: "FOR", y: data.FOR, color: "#38c172"},
-                {x: "AGAINST", y: data.AGAINST, color: "#e3342f"},
-                {x: "ABSTAIN", y: data.ABSTAIN, color: "#ffc107"}
-            ]
-    }
-
     function onAutoRefreshToggle(e) {
         if (e.target.checked)
             setCounter(5);
@@ -103,13 +92,13 @@ function ResultsViewer({dataString, className}) {
 
     return (
         <div className={"col-12 p-0"}>
-            {(!isInitialized || (!graphData || graphData.length === 0)) &&
-            <div className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
-                 style={{'zIndex': 50, 'backgroundColor': 'rgba(25,25,25,0.4)'}}>
-                <div className="spinner-border text-light" role="status">
-                    <span className="sr-only">Loading...</span>
+            {!isInitialized &&
+                <div className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
+                     style={{'zIndex': 50, 'backgroundColor': 'rgba(25,25,25,0.4)'}}>
+                    <div className="spinner-border text-light" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
                 </div>
-            </div>
             }
             <div className={"card-body row"}>
                 {error &&
@@ -117,73 +106,64 @@ function ResultsViewer({dataString, className}) {
                     {error}
                 </div>
                 }
-                {graphData && graphData.length !== 0 &&
-                <>
-                    <div className={"col-md-6 mx-auto row"}>
-                        <div className={"mx-auto"}>
-                            <XYPlot height={400} width={400} xDistance={100} xType="ordinal">
-                                <VerticalGridLines/>
-                                <HorizontalGridLines/>
-                                <VerticalBarSeries colorType={"literal"} data={graphData}/>
-                                <XAxis/>
-                                <YAxis/>
-                            </XYPlot>
+
+                <div className={"col-md-6 mx-auto row"}>
+                    <div className={"mx-auto"}>
+                        <ResultGraph height={400} width={400} data={data}/>
+                    </div>
+                </div>
+                <div className="col-md-6 px-3 d-flex align-items-stretch flex-column">
+                    <div className="flex-fill">
+                        <div className="d-flex h-100">
+                            <ul className="list-group list-group-horizontal align-self-center w-100">
+                                <li className="list-group-item list-group-item-success col-4 text-center">
+                                    <h4 className={"mb-0"}>
+                                        For<br/>
+                                        <span className="badge badge-success badge-pill">{data ? data.FOR : 0 }</span>
+                                    </h4>
+                                </li>
+                                <li className="list-group-item list-group-item-danger col-4 text-center">
+                                    <h4 className={"mb-0"}>
+                                        Against<br/>
+                                        <span className="badge badge-danger badge-pill">{data ? data.AGAINST : 0}</span>
+                                    </h4>
+                                </li>
+                                <li className="list-group-item list-group-item-warning col-4 text-center">
+                                    <h4 className={"mb-0"}>
+                                        Abstain<br/>
+                                        <span className="badge badge-warning badge-pill">{data ? data.ABSTAIN : 0}</span>
+                                    </h4>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div className="col-md-6 px-3 d-flex align-items-stretch flex-column">
-                        <div className="flex-fill">
-                            <div className="d-flex h-100">
-                                <ul className="list-group list-group-horizontal align-self-center w-100">
-                                    <li className="list-group-item list-group-item-success col-4 text-center">
-                                        <h4 className={"mb-0"}>
-                                            For<br/>
-                                            <span className="badge badge-success badge-pill">{data.FOR}</span>
-                                        </h4>
-                                    </li>
-                                    <li className="list-group-item list-group-item-danger col-4 text-center">
-                                        <h4 className={"mb-0"}>
-                                            Against<br/>
-                                            <span className="badge badge-danger badge-pill">{data.AGAINST}</span>
-                                        </h4>
-                                    </li>
-                                    <li className="list-group-item list-group-item-warning col-4 text-center">
-                                        <h4 className={"mb-0"}>
-                                            Abstain<br/>
-                                            <span className="badge badge-warning badge-pill">{data.ABSTAIN}</span>
-                                        </h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            {(isInitialized && question['is_active'] !== 0) &&
-                            <div className="float-right">
-                                <div className="form-inline">
-                                    {autoRefresh &&
-                                    <div className="input-label mr-2">Auto-refresh in {counter} seconds...</div>
-                                    }
-                                    <div className="input-group">
-                                        <button disabled={autoRefresh}
-                                                className={"form-control " + (autoRefresh ? 'disabled' : 'btn-primary')}
-                                                onClick={updateResults}>Refresh
-                                        </button>
-                                        <div className="input-group-append">
-                                            <label className="input-group-text">
-                                                Auto&nbsp;&nbsp;
-                                                <input type="checkbox" onChange={onAutoRefreshToggle}
-                                                       checked={autoRefresh}
-                                                       aria-label="Checkbox for following text input"/>
-                                            </label>
-                                        </div>
+                    <div>
+                        {(isInitialized && question['is_active'] !== 0) &&
+                        <div className="float-right">
+                            <div className="form-inline">
+                                {autoRefresh &&
+                                <div className="input-label mr-2">Auto-refresh in {counter} seconds...</div>
+                                }
+                                <div className="input-group">
+                                    <button disabled={autoRefresh}
+                                            className={"form-control " + (autoRefresh ? 'disabled' : 'btn-primary')}
+                                            onClick={updateResults}>Refresh
+                                    </button>
+                                    <div className="input-group-append">
+                                        <label className="input-group-text">
+                                            Auto&nbsp;&nbsp;
+                                            <input type="checkbox" onChange={onAutoRefreshToggle}
+                                                   checked={autoRefresh}
+                                                   aria-label="Checkbox for following text input"/>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
-                            }
                         </div>
-
+                        }
                     </div>
-                </>
-                }
+
+                </div>
             </div>
         </div>
     )
