@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use App\Role\UserRole;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -26,12 +27,12 @@ class LoginController extends Controller
         login as traitLogin;
     }
 
-//    /**
-//     * Where to redirect users after login.
-//     *
-//     * @var string
-//     */
-//    protected $redirectTo = RouteServiceProvider::HOME;
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     // Override trait function and call it from the overriden function
     public function login(Request $request)
