@@ -25,7 +25,7 @@ Route::get('/', function () {
         }
     }
     return view('welcome');
-});
+})->name('root');
 
 
 //Auth::routes();
@@ -87,6 +87,17 @@ Route::group([
             ->name('questions.question.update')->where('id', '[0-9]+');
         Route::delete('/question/{question}', 'QuestionsController@destroy')
             ->name('admin.questions.destroy')->where('id', '[0-9]+');
+    });
+
+    Route::group([
+        'prefix' => 'users',
+    ], function () {
+        Route::get('/', 'UsersController@index')
+            ->name('admin.users');
+        Route::put('eng_soc/{engSoc}', 'EngSocsController@update')
+            ->name('admin.users.update')->where('id', '[0-9]+');
+        Route::delete('/eng_soc/{engSoc}', 'EngSocsController@destroy')
+            ->name('admin.users.destroy')->where('id', '[0-9]+');
     });
 
 });
