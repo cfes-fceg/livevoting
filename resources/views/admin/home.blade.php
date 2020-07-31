@@ -3,9 +3,10 @@
 @section('content')
     <h1 class="display-4 my-5 text-center">Hello, {{ Auth::user()->name }}</h1>
     <ul class="btn-group row w-100">
-        <a class="btn col-4 btn-outline-secondary" href="{{ route("admin.engsocs") }}">Manage Engineering Societies</a>
-        <a class="btn col-4 btn-outline-primary" href="{{ route("admin.questions.create") }}">Create new Question</a>
-        <a class="btn col-4 btn-outline-secondary" href="{{ route("admin.questions") }}">Manage questions</a>
+        <a class="btn col-3 btn-outline-primary" href="{{ route("admin.questions.create") }}">Create new Question</a>
+        <a class="btn col-3 btn-outline-secondary" href="{{ route("admin.questions") }}">Manage Questions</a>
+        <a class="btn col-3 btn-outline-secondary" href="{{ route("admin.engsocs") }}">Manage Engineering Societies</a>
+        <a class="btn col-3 btn-outline-secondary" href="{{ route("admin.users") }}">Manage Users</a>
     </ul>
     <h3 class="mt-4">Recent questions:</h3>
     <div class="row">
@@ -16,7 +17,6 @@
                         <div class="results-graph" data="{{ json_encode($question->results()) }}">
                         </div>
                     </div>
-                    {{--                <img src="..." class="card-img-top" alt="...">--}}
                     <div class="card-body">
                         <h5 class="card-title">#{{ $question->id }}: {{ $question->title }}</h5>
                     </div>
