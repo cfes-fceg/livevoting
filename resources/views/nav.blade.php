@@ -19,7 +19,11 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('admin.engsocs') }}">Eng Socs</a>
                             <a class="dropdown-item" href="{{ route('admin.questions') }}">Questions</a>
+                            <a class="dropdown-item" href="{{ route('admin.users') }}">Users</a>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.questions.create') }}">New Question</a>
                     </li>
                 @endif
             </ul>
