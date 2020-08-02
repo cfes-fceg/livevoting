@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "cfes-fceg/live-voting",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "The CFES's Live Voting application",
     "keywords": [
         "framework",
         "laravel"
