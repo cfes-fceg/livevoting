@@ -16,12 +16,12 @@
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-      "ext-json": "*"
+        "fzaninotto/faker": "^1.9.1",
+        "ext-json": "*"
     },
     "require-dev": {
         "crestapps/laravel-code-generator": "^2.4",
         "facade/ignition": "^2.0",
-        "fzaninotto/faker": "^1.9.1",
         "laravel/telescope": "^3.5",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
