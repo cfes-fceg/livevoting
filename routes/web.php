@@ -94,10 +94,14 @@ Route::group([
     ], function () {
         Route::get('/', 'UsersController@index')
             ->name('admin.users');
-        Route::put('eng_soc/{engSoc}', 'EngSocsController@update')
-            ->name('admin.users.update')->where('id', '[0-9]+');
-        Route::delete('/eng_soc/{engSoc}', 'EngSocsController@destroy')
-            ->name('admin.users.destroy')->where('id', '[0-9]+');
+        Route::put('/{user}', 'UsersController@update')
+            ->name('admin.users.update');
+        Route::delete('/user/{user}', 'UsersController@destroy')
+            ->name('admin.users.destroy')->where('user', '[0-9]+');
+//        Route::get('/user/{user}/sendResetEmail', 'UsersController@sendResetLink')
+//            ->name('admin.users.sendResetLink')->where('user', '[0-9]+');
+        Route::get('/{user}/edit', 'UsersController@edit')
+            ->name('admin.users.edit')->where('user', '[0-9]+');
     });
 
 });

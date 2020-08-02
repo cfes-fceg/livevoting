@@ -13,7 +13,7 @@
         @foreach(\App\Question::whereHas('votes')->orderByDesc('created_at')->take(3)->get() as $question)
             <div class="col-md-4 py-3">
                 <div class="card h-100">
-                    <div class="card-img-top pt-2">
+                    <div class="card-img-top pt-3">
                         <div class="results-graph" data="{{ json_encode($question->results()) }}">
                         </div>
                     </div>
