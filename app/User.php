@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Role\UserRole;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -111,5 +112,18 @@ class User extends Authenticatable
 
     public function votes() {
         return $this->hasMany(Vote::class, 'voter_id');
+    }
+
+    public static function sendWelcomeEmail(User $user)
+    {
+        // Generate a new reset password token
+        $token = app('auth.password.broker')->createToken($user);
+
+        // Send email
+        Mail::send('emails.welcome', ['user' => $user, 'token' => $token], function ($m) use ($user) {
+            $m->from('it@cfes.ca', 'CFES Live Voting');
+
+            $m->to($user->email, $user->name)->subject('An Admin has requested that you change you password.');
+        });
     }
 }
