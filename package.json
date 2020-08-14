@@ -13,11 +13,11 @@
     "devDependencies": {
         "@babel/preset-react": "^7.0.0",
         "axios": "^0.19",
-        "bootstrap": "^4.5.0",
+        "bootstrap": "^4.5.2",
         "cross-env": "^7.0",
         "jquery": "^3.2",
         "laravel-mix": "^5.0.4",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.20",
         "popper.js": "^1.12",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
@@ -30,8 +30,8 @@
         "@fortawesome/free-solid-svg-icons": "^5.14.0",
         "@fortawesome/react-fontawesome": "^0.1.11",
         "nivo": "^0.31.0",
-        "react-bootstrap-typeahead": "^5.1.0",
+        "react-bootstrap-typeahead": "^5.1.1",
         "react-vis": "^1.11.7",
-        "victory": "^35.0.5"
+        "victory": "^35.0.8"
     }
 }
