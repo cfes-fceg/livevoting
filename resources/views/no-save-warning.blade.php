@@ -1,6 +1,6 @@
 <div class="text-center">
     @if(in_array(env('APP_ENV'), ['staging', 'local']))
-        <h4 class="alert alert-warning">
+        <h4 class="alert alert-warning font-weight-normal">
             <span class="font-weight-bold">
                 Warning:
             </span>

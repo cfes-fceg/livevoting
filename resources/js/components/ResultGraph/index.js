@@ -8,20 +8,23 @@ export function ResultGraph({data, className, height, width}) {
     useEffect(() => {
         if (data)
             setGraphData([
-                {x: "FOR", y: data.FOR, color: "#38c172"},
-                {x: "AGAINST", y: data.AGAINST, color: "#e3342f"},
-                {x: "ABSTAIN", y: data.ABSTAIN, color: "#ffc107"}
+                {x: "For", y: data.FOR, color: "var(--green)"},
+                {x: "Against", y: data.AGAINST, color: "var(--red)"},
+                {x: "Abstain", y: data.ABSTAIN, color: "var(--yellow)"}
             ]);
     }, [data])
 
     if (graphData && graphData.length > 0)
         return (
             <XYPlot className="mx-auto" height={height} width={width} xDistance={100} xType="ordinal">
-                <VerticalGridLines/>
-                <HorizontalGridLines/>
+                <HorizontalGridLines />
+                <XAxis style={{
+                    fontSize: "0.95em"
+                }}/>
+                <YAxis style={{
+                    fontSize: "0.95em"
+                }}/>
                 <VerticalBarSeries colorType={"literal"} data={graphData}/>
-                <XAxis/>
-                <YAxis/>
             </XYPlot>
         )
     else
