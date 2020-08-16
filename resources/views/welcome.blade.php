@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-5 mt-4 mb-4 mx-auto">
+        <div class="col-8 col-md-5 mt-md-4 mx-auto">
             <img src="/images/cfes-logo.svg" alt="CFES Logo"/>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-4">
             <div class="card h-100">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -16,7 +16,7 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-4 col-lg-3 p-0">
+                            <div class="input-group-prepend col-5 col-lg-4 p-0">
                                 <label for="email"
                                        class="input-group-text w-100">{{ __('E-Mail Address') }}</label>
                             </div>
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-4 col-lg-3 p-0">
+                            <div class="input-group-prepend col-5 col-lg-4 p-0">
                                 <label for="password"
                                        class="input-group-text w-100">{{ __('Password') }}</label>
                             </div>
@@ -55,8 +55,8 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-4">
-                                <div class="btn form-check pl-4">
+                            <div class="col-md-4 pr-0">
+                                <div class="btn form-check pl-3">
                                     <input class="form-check-input" type="checkbox" name="remember"
                                            id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -65,7 +65,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8 pl-0">
                                 <button type="submit" class="btn btn-primary float-right">
                                     {{ __('Login') }}
                                 </button>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 my-auto">
+        <div class="col-md-6 mt-4">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
@@ -87,7 +87,7 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-5 col-lg-4 p-0">
+                            <div class="input-group-prepend col-5 p-0">
                                 <label for="name" class="input-group-text w-100">{{ __('Name') }}</label>
                             </div>
 
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-5 col-lg-4 p-0">
+                            <div class="input-group-prepend col-5 p-0">
                                 <label for="email"
                                        class="input-group-text w-100">{{ __('E-Mail Address') }}</label>
                             </div>
@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-5 col-lg-4 p-0">
+                            <div class="input-group-prepend col-5 p-0">
                                 <label for="password"
                                        class="input-group-text w-100">{{ __('Password') }}</label>
                             </div>
@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend col-5 col-lg-4 p-0">
+                            <div class="input-group-prepend col-5 p-0">
                                 <label for="password-confirm"
                                        class="input-group-text w-100">{{ __('Confirm Password') }}</label>
                             </div>
