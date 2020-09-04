@@ -21,8 +21,10 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip pdo_sqlite bcmath
+      - run: sudo apt update # PHP CircleCI 2.0 Configuration File
+      # PHP CircleCI 2.0 Configuration File
+      - run: sudo apt install php7.3-sqlite3
+      - run: sudo docker-php-ext-install zip pdo_sqlite bcmath pdo_mysql
 
       # Download and cache dependencies
       - restore_cache:
