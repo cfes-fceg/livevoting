@@ -21,7 +21,7 @@ jobs:
       - run:
           name: "Create Environment file"
           command: |
-            mv .env.testing .env
+            mv .env.example .env
 
       # Download and cache dependencies
       - restore_cache:
