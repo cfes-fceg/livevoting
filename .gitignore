@@ -15,3 +15,4 @@ _ide_helper_models.php
 /public/css/app.css
 /public/js/app.js
 /public/vendor/
+/storage/testing.sqlite
