@@ -81,6 +81,8 @@ Route::group([
             ->name('admin.questions.show')->where('id', '[0-9]+');
         Route::get('/{question}/edit', 'QuestionsController@edit')
             ->name('admin.questions.edit')->where('id', '[0-9]+');
+        Route::get('/{question}/pdf', 'QuestionsController@pdf')
+            ->name('admin.questions.pdf');
         Route::post('/', 'QuestionsController@store')
             ->name('admin.questions.store');
         Route::put('question/{question}', 'QuestionsController@update')
