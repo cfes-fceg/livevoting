@@ -16,10 +16,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
-<header>
-    @include('nav')
-</header>
-@include('no-save-warning')
+@if(!isset($excludeHeader) || !$excludeHeader)
+    <header>
+        @include('nav')
+    </header>
+    @include('no-save-warning')
+@endif
 
 <main class="py-4 flex-shrink-0">
     <div class="container">

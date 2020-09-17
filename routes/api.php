@@ -31,6 +31,7 @@ Route::group([
     ], function() {
         Route::put('/engsocs/{id}', 'EngSocsController@apiUpdate');
         Route::get('/questions/{question}/results','QuestionsController@getResults');
+        Route::get('/questions/{question}/votes', 'VoterController@votes');
     });
 
     Route::get('/questions/active', 'VoterController@getActiveQuestions');

@@ -33,8 +33,6 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-
-
         return view('admin.questions.create');
     }
 
@@ -163,6 +161,12 @@ class QuestionsController extends Controller
     protected function getResults(Question $question)
     {
         return response()->json($question->results());
+    }
+
+    public function pdf($id) {
+        $question = Question::findOrFail($id);
+
+        return view('admin.pdf.question-results')->with('question', $question);
     }
 
 }
