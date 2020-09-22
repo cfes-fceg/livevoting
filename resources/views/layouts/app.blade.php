@@ -32,5 +32,10 @@
 @include('footer')
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+@if(isset($triggerPrint) && $triggerPrint)
+    <script type="text/javascript">
+        window.print();
+    </script>
+@endif
 </body>
 </html>
