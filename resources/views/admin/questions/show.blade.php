@@ -61,7 +61,7 @@
 
         <div class="row m-0" id="results-viewer" data="{{ json_encode(['question' => $question]) }}"></div>
         @if(! ($question->is_active))
-            <a class="mx-auto btn btn-primary mb-3" href="{{ route('admin.questions.pdf', $question->id) }}">Download
+            <a class="mx-auto btn btn-primary mb-3" target="_blank" href="{{ route('admin.questions.pdf', $question->id) }}">Download
                 results report</a>
         @endif
     </div>
