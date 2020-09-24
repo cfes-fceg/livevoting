@@ -4,7 +4,7 @@
             <span class="input-group-text w-100">Title: </span>
         </div>
         <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" type="text" id="title"
-               value="{{ old('title', optional($question)->title) }}" minlength="1" maxlength="255"
+               value="{{ old('title', optional($question)->title) ?: $title }}" minlength="1" maxlength="255"
                placeholder="Enter title here...">
     </div>
     {!! $errors->first('title', '<p class="help-block">:message</p>') !!}

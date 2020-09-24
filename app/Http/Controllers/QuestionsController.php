@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\Vote;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class QuestionsController extends Controller
 {
@@ -15,7 +19,7 @@ class QuestionsController extends Controller
     /**
      * Display a listing of the questions.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -29,11 +33,13 @@ class QuestionsController extends Controller
     /**
      * Show the form for creating a new question.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request $request
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.questions.create');
+
+        return view('admin.questions.create')->with('title', $request->query('title'));
     }
 
     /**
@@ -41,7 +47,7 @@ class QuestionsController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -65,7 +71,7 @@ class QuestionsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function show($id)
     {
@@ -79,7 +85,7 @@ class QuestionsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
@@ -95,7 +101,7 @@ class QuestionsController extends Controller
      * @param int $id
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update($id, Request $request)
     {
@@ -120,7 +126,7 @@ class QuestionsController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy($id)
     {

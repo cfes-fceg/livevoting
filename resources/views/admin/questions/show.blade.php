@@ -37,9 +37,9 @@
                             Show all
                         </a>
 
-                        <a href="{{ route('admin.questions.create') }}" class="btn btn-success"
+                        <a href="{{ route('admin.questions.create', ['title' => $question->title]) }}" class="btn btn-success"
                            title="Create New Question">
-                            New
+                            New (Duplicate)
                         </a>
 
                         <a href="{{ route('admin.questions.edit', $question->id ) }}" class="btn btn-primary"

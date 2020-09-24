@@ -33,6 +33,7 @@
                 {{ csrf_field() }}
                 @include ('admin.questions.form', [
                                             'question' => null,
+                                            'title' => $title
                                           ])
 
                 <div class="form-group">
