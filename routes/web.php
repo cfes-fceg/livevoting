@@ -58,15 +58,15 @@ Route::group([
     ], function () {
         Route::get('/', 'EngSocsController@index')
             ->name('admin.engsocs');
-        Route::get('/create', 'EngSocsController@create')
-            ->name('admin.engsocs.create');
+        Route::get('/new', 'EngSocsController@create')
+            ->name('admin.engsocs.new');
         Route::get('/{engSoc}/edit', 'EngSocsController@edit')
             ->name('admin.engsocs.edit')->where('id', '[0-9]+');
         Route::post('/', 'EngSocsController@store')
             ->name('admin.engsocs.store');
-        Route::put('eng_soc/{engSoc}', 'EngSocsController@update')
+        Route::put('/{engSoc}', 'EngSocsController@update')
             ->name('admin.engsocs.update')->where('id', '[0-9]+');
-        Route::delete('/eng_soc/{engSoc}', 'EngSocsController@destroy')
+        Route::delete('/{engSoc}', 'EngSocsController@destroy')
             ->name('admin.engsocs.destroy')->where('id', '[0-9]+');
     });
 
@@ -77,7 +77,7 @@ Route::group([
             ->name('admin.questions');
         Route::get('/create', 'QuestionsController@create')
             ->name('admin.questions.create');
-        Route::get('/show/{question}', 'QuestionsController@show')
+        Route::get('/{question}', 'QuestionsController@show')
             ->name('admin.questions.show')->where('id', '[0-9]+');
         Route::get('/{question}/edit', 'QuestionsController@edit')
             ->name('admin.questions.edit')->where('id', '[0-9]+');
@@ -85,9 +85,9 @@ Route::group([
             ->name('admin.questions.pdf');
         Route::post('/', 'QuestionsController@store')
             ->name('admin.questions.store');
-        Route::put('question/{question}', 'QuestionsController@update')
+        Route::put('/{question}', 'QuestionsController@update')
             ->name('questions.question.update')->where('id', '[0-9]+');
-        Route::delete('/question/{question}', 'QuestionsController@destroy')
+        Route::delete('/{question}', 'QuestionsController@destroy')
             ->name('admin.questions.destroy')->where('id', '[0-9]+');
     });
 
@@ -98,7 +98,7 @@ Route::group([
             ->name('admin.users');
         Route::put('/{user}', 'UsersController@update')
             ->name('admin.users.update');
-        Route::delete('/user/{user}', 'UsersController@destroy')
+        Route::delete('/{user}', 'UsersController@destroy')
             ->name('admin.users.destroy')->where('user', '[0-9]+');
 //        Route::get('/user/{user}/sendResetEmail', 'UsersController@sendResetLink')
 //            ->name('admin.users.sendResetLink')->where('user', '[0-9]+');

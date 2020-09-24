@@ -21,7 +21,7 @@
         </div>
 
         <div class="btn-group btn-group-md float-right" role="group">
-            <a href="{{ route('admin.engsocs.create') }}" class="btn btn-success" title="Create New Eng Soc">
+            <a href="{{ route('admin.engsocs.new') }}" class="btn btn-success" title="Create New Eng Soc">
                 Create new EngSoc
             </a>
         </div>
