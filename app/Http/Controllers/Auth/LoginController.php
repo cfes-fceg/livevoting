@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,16 @@ class LoginController extends Controller
     {
         //Set session as 'login'
         Session::put('last_auth_attempt', 'login');
+
+        $validator = Validator::make($request->all(), [
+            recaptchaFieldName() => recaptchaRuleName()
+        ]);
+
+        if($validator->fails()) {
+            return back()->withInput()
+                ->withErrors($validator->errors());
+        }
+
         //The trait is not a class. You can't access its members directly.
         return $this->traitLogin($request);
     }
