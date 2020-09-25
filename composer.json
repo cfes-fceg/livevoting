@@ -9,15 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "fzaninotto/faker": "^1.9.1",
+        "guzzlehttp/guzzle": "^7.1",
         "laravel/framework": "^7.0",
         "laravel/passport": "^9.3",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.1",
-        "fzaninotto/faker": "^1.9.1",
-        "ext-json": "*"
+        "laravel/ui": "^2.1"
     },
     "require-dev": {
         "crestapps/laravel-code-generator": "^2.4",
