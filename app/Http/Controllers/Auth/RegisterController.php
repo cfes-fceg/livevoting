@@ -7,6 +7,7 @@ use App\Role\UserRole;
 use \App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -49,10 +50,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        Session::put('last_auth_attempt', 'register');
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            recaptchaFieldName() => recaptchaRuleName(),
         ]);
     }
 
