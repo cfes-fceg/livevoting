@@ -15,6 +15,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    {!! \Biscolab\ReCaptcha\Facades\ReCaptcha::htmlScriptTagJsApi([]) !!}
+
 </head>
 <body class="d-flex flex-column h-100">
 @if(!isset($excludeHeader) || !$excludeHeader)
