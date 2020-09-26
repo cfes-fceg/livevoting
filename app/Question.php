@@ -56,14 +56,13 @@ class Question extends Model
         $results = $this->votes()->select('vote', DB::raw('count(*) as total'))->groupBy('vote')->get();
         $response = [];
         $total = 0;
+        foreach (Vote::OPTIONS as $option) {
+            $response[$option] = 0;
+        }
         if (count($results) > 0)
             foreach ($results as $result) {
                 $total += $result->total;
                 $response[$result->vote] = $result->total;
-            }
-        else
-            foreach (Vote::OPTIONS as $option) {
-                $response[$option] = 0;
             }
         $response['TOTAL'] = $total;
         return $response;
