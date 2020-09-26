@@ -27,26 +27,25 @@ Route::get('/', function () {
     return view('welcome');
 })->name('root');
 
-
 //Auth::routes();
-
-//Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::POST('login', 'Auth\LoginController@login')->name('login');
+Route::POST('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+Route::GET('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::GET('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::POST('logout', 'Auth\LoginController@logout')->name('logout');
 Route::POST('password/confirm', 'Auth\ConfirmPasswordController@confirm');
 Route::GET('password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+Route::POST('login', 'Auth\LoginController@login')->name('login');
 Route::POST('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::GET('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::POST('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 Route::GET('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::POST('register', 'Auth\RegisterController@register')->name('register');
-//Route::GET('register', 'Auth\RegisterController@showRegistrationForm');
 
-Route::get('/home', 'VoterController@index')->middleware(['auth', 'check_user_role:' . UserRole::ROLE_VOTER])->name('voter.home');
+Route::get('/home', 'VoterController@index')->middleware(['auth', 'verified', 'check_user_role:' . UserRole::ROLE_VOTER])->name('voter.home');
 
 Route::group([
     'prefix' => 'admin',
-    'middleware' => ['auth', 'check_user_role:' . UserRole::ROLE_ADMIN]
+    'middleware' => ['auth', 'verified', 'check_user_role:' . UserRole::ROLE_ADMIN]
 ], function () {
 
     Route::get('/', function () {
