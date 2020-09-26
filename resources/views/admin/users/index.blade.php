@@ -48,6 +48,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Email Verified</th>
                             <th/>
                         </tr>
                         </thead>
@@ -57,6 +58,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ \App\Role\UserRole::getRoleList()[$user->getRoles()[0]] }}</td>
+                                <td>{{ $user->email_verified_at }}</td>
                                 <td>
                                     <form method="POST" action="{!! route('admin.users.destroy', $user->id) !!}"
                                           accept-charset="UTF-8">
