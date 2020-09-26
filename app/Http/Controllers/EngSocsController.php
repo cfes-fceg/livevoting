@@ -19,7 +19,7 @@ class EngSocsController extends Controller
     public function index()
     {
         $engSocs = EngSoc::orderBy('name', 'asc')->paginate(25);
-        $voters = User::where('roles', 'like', '%'.UserRole::ROLE_VOTER.'%')->get();
+        $voters = User::where('roles', 'like', '%' . UserRole::ROLE_VOTER . '%')->whereNotNull('email_verified_at')->get();
 
         return view('admin.eng_socs.index', compact('engSocs'), compact('voters'));
     }
