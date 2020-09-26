@@ -30,7 +30,7 @@ function ResultsViewer({dataString, className}) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isInitialized, setIsInitialized] = useState(false);
-    const [autoRefresh, setAutoRefresh] = useState(true);
+    const [autoRefresh, setAutoRefresh] = useState(question && question['is_active'] !== 0);
     const [refreshInterval, setRefreshInterval] = useState(0);
     const [counter, setCounter] = useState(5);
 
