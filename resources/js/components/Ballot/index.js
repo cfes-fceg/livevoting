@@ -13,9 +13,9 @@ function Ballot({className, engSocs, question, onCompletion}) {
     const [votingEnabled, setVotingEnabled] = useState(true);
 
     function onVoteChange(id) {
-        return function (value) {
+        return function (value, noted) {
             let vts = {...votes}
-            vts[id] = value;
+            vts[id] = {value: value, noted: noted};
             setVotes(vts);
         }
     }
@@ -88,7 +88,8 @@ function Ballot({className, engSocs, question, onCompletion}) {
                                         {engSoc.name}
                                     </div>
                                     <div className="col-7">
-                                        <VoteButton value={votes[engSoc.id]}
+                                        <VoteButton value={votes[engSoc.id] != null ? votes[engSoc.id].value : null}
+                                                    noted={votes[engSoc.id] != null ? votes[engSoc.id].noted : null}
                                                     disabled={!votingEnabled}
                                                     rootClass={"float-right"}
                                                     onChange={onVoteChange(engSoc.id)}

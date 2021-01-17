@@ -38,7 +38,8 @@ class VoterController extends Controller
             })->where('is_active', true)->get();
             return response()->json($questions, 200);
         } else {
-            return abort(403, 'You must be the voting member of at least one EngSoc');
+            abort(403, 'You must be the voting member of at least one EngSoc');
+            return null;
         }
     }
 
@@ -64,11 +65,12 @@ class VoterController extends Controller
 
         foreach ($usersEngSocs as $engSoc) {
             $vote = $votes[$engSoc->id];
-            if (!in_array($vote, Vote::OPTIONS)) {
+            if (!in_array($vote["value"], Vote::OPTIONS)) {
                 abort(422, 'EngSoc '.$engSoc->name.' is missing its vote');
             } else {
                 $voteObj = new Vote();
-                $voteObj->vote = $vote;
+                $voteObj->vote = $vote["value"];
+                $voteObj->noted = $vote["noted"];
                 $voteObj->voter()->associate($user);
                 $voteObj->engSoc()->associate($engSoc);
                 array_push($validatedVotes, $voteObj);

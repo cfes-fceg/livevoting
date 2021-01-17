@@ -12,7 +12,7 @@ class Vote extends Model
         "ABSTAIN"
     ];
 
-    protected $fillable = ['vote'];
+    protected $fillable = ['vote', 'noted'];
 
     public function question()
     {
