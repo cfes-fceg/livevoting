@@ -65,15 +65,22 @@ class VoterController extends Controller
 
         foreach ($usersEngSocs as $engSoc) {
             $vote = $votes[$engSoc->id];
-            if (!in_array($vote["value"], Vote::OPTIONS)) {
-                abort(422, 'EngSoc '.$engSoc->name.' is missing its vote');
-            } else {
+            if (in_array($vote, Vote::OPTIONS)) {
+                $voteObj = new Vote();
+                $voteObj->vote = $vote["value"];
+                $voteObj->noted = false;
+                $voteObj->voter()->associate($user);
+                $voteObj->engSoc()->associate($engSoc);
+                array_push($validatedVotes, $voteObj);
+            } else if (in_array($vote["value"], Vote::OPTIONS)) {
                 $voteObj = new Vote();
                 $voteObj->vote = $vote["value"];
                 $voteObj->noted = $vote["noted"];
                 $voteObj->voter()->associate($user);
                 $voteObj->engSoc()->associate($engSoc);
                 array_push($validatedVotes, $voteObj);
+            } else {
+                abort(422, 'EngSoc '.$engSoc->name.' is missing its vote');
             }
         }
 

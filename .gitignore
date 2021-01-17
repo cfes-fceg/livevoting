@@ -16,3 +16,4 @@ _ide_helper_models.php
 /public/js/app.js
 /public/vendor/
 /storage/testing.sqlite
+/public/mix-manifest.json
