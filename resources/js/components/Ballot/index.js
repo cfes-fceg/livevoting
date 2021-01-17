@@ -10,6 +10,7 @@ function Ballot({className, engSocs, question, onCompletion}) {
     const [isLoading, setIsLoading] = useState(false);
     const [isComplete, setIsComplete] = useState(false);
 
+    // noinspection JSUnusedLocalSymbols
     const [votingEnabled, setVotingEnabled] = useState(true);
 
     function onVoteChange(id) {
@@ -49,7 +50,7 @@ function Ballot({className, engSocs, question, onCompletion}) {
 
     function validateForm() {
         for (let index in engSocs) {
-            if (!votes[engSocs[index].id]) {
+            if (!votes[engSocs[index].id] || votes[engSocs[index].id].value == null) {
                 setError("EngSoc " + engSocs[index].name + " has not selected an option.");
                 return false;
             }

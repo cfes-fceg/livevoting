@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Ballot, BALLOT_OPTIONS} from "../Ballot";
 import axios from 'axios';
 
+// noinspection JSUnusedLocalSymbols
 function VotingBooth({dataString, className}) {
     const [engSocs, setEngSocs] = useState([]);
     const [activeQuestions, setActiveQuestions] = useState([]);
@@ -36,7 +37,7 @@ function VotingBooth({dataString, className}) {
                 setActiveQuestions(response.data);
             } else {
                 console.debug(response);
-                // setError(response.data.error)
+                setError(response.data.error)
             }
         }).catch(error => {
             setError(error);
