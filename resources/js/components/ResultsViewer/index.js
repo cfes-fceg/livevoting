@@ -67,6 +67,18 @@ function ResultsViewer({dataString, className}) {
         setIsInitialized(true);
     }, [data])
 
+    function getVoteColor(vote) {
+        switch (vote) {
+            case "FOR":
+                return "success"
+            case "AGAINST":
+                return "danger"
+            case "ABSTAIN":
+            default:
+                return "warning"
+        }
+    }
+
     function updateResults() {
         if (question) {
             setIsLoading(true);
@@ -158,7 +170,7 @@ function ResultsViewer({dataString, className}) {
                             {notedVotes.map((notedVote, index) => {
                                 return <div key={index} className="col-6">
                                     {notedVote.eng_soc.name} <span
-                                    className={"badge badge-secondary"}>{notedVote.vote}</span>
+                                    className={"badge badge-"+getVoteColor(notedVote.vote)}>{notedVote.vote}</span>
                                 </div>
                             })}
                         </div>
