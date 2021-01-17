@@ -65,13 +65,8 @@ class VoterController extends Controller
 
         foreach ($usersEngSocs as $engSoc) {
             $vote = $votes[$engSoc->id];
-            if (in_array($vote, Vote::OPTIONS)) {
-                $voteObj = new Vote();
-                $voteObj->vote = $vote["value"];
-                $voteObj->noted = false;
-                $voteObj->voter()->associate($user);
-                $voteObj->engSoc()->associate($engSoc);
-                array_push($validatedVotes, $voteObj);
+            if(in_array($vote, Vote::OPTIONS)) {
+                abort(422, "You are using an outdated client. Please clear your cache and try again");
             } else if (in_array($vote["value"], Vote::OPTIONS)) {
                 $voteObj = new Vote();
                 $voteObj->vote = $vote["value"];
