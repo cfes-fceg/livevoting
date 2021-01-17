@@ -168,7 +168,7 @@ function ResultsViewer({dataString, className}) {
                         <h5>Noted Votes:</h5>
                         <div className="row">
                             {notedVotes.map((notedVote, index) => {
-                                return <div key={index} className="col-6">
+                                return <div key={index} className={"col-12 col-md-6 my-2 mx-auto"}>
                                     {notedVote.eng_soc.name} <span
                                     className={"badge badge-"+getVoteColor(notedVote.vote)}>{notedVote.vote}</span>
                                 </div>
