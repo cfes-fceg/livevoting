@@ -68,5 +68,7 @@ class Question extends Model
         return $response;
     }
 
-
+    public function notedVotes() {
+        return $this->votes()->where('noted', '=', true)->with('engSoc')->get();
+    }
 }
