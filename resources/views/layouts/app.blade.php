@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {!! \Biscolab\ReCaptcha\Facades\ReCaptcha::htmlScriptTagJsApi([]) !!}
 
@@ -34,7 +34,7 @@
 
 @include('footer')
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 @if(isset($triggerPrint) && $triggerPrint)
     <script type="text/javascript">
         window.print();
