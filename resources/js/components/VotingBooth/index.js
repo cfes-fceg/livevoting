@@ -79,7 +79,7 @@ function VotingBooth({dataString, className}) {
             <div className="row pt-4 pl-4 pr-4">
                 {activeQuestions.map((question, index) => {
                     return (
-                        <Ballot className="col-12 col-md-6 mx-auto pb-4" key={index} engSocs={engSocs}
+                        <Ballot className="col-12 col-md-8 mx-auto pb-4" key={index} engSocs={engSocs}
                                 question={question}/>
                     )
                 })}

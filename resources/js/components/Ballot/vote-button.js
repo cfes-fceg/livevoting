@@ -9,14 +9,24 @@ export const BALLOT_OPTIONS = {
     UNSET: null
 }
 
-export function VoteButton({value, onChange, rootClass, disabled}) {
+export function VoteButton({value, noted, onChange, rootClass, disabled}) {
+    const [noteVote, setNoteVote] = useState(noted || false)
     const [ballotValue, setBallotValue] = useState(value || BALLOT_OPTIONS.UNSET)
 
     function onRadioChange(e) {
         if (!disabled) {
             setBallotValue(e.target.value);
             if (onChange) {
-                onChange(e.target.value);
+                onChange(e.target.value, noteVote);
+            }
+        }
+    }
+
+    function onNoteVoteChange(e) {
+        if (!disabled) {
+            setNoteVote(e.target.checked)
+            if (onChange) {
+                onChange(ballotValue, e.target.checked)
             }
         }
     }
@@ -55,6 +65,15 @@ export function VoteButton({value, onChange, rootClass, disabled}) {
                     checked={ballotValue === BALLOT_OPTIONS.AGAINST}
                     onChange={onRadioChange}
                 />Against {ballotValue === BALLOT_OPTIONS.AGAINST && <FontAwesomeIcon style={{'marginLeft': '0.3em'}} icon={faCheckSquare}/>}
+            </label>
+            <label className="btn btn-secondary">
+                <input
+                    type="checkbox"
+                    name="noted"
+                    id="notes"
+                    value={noteVote}
+                    onChange={onNoteVoteChange}
+                /> Note? {noteVote && <FontAwesomeIcon style={{'marginLeft': '0.3em'}} icon={faCheckSquare}/>}
             </label>
         </div>
     )
