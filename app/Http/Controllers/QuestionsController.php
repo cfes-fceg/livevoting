@@ -169,6 +169,11 @@ class QuestionsController extends Controller
         return response()->json($question->results());
     }
 
+    protected function getNotedVotes(Question $question)
+    {
+        return response()->json($question->notedVotes());
+    }
+
     public function pdf($id) {
         $question = Question::findOrFail($id);
 

@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import {ResultGraph} from "../ResultGraph";
+import {VoteButton} from "../Ballot/vote-button";
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -26,6 +27,7 @@ function useInterval(callback, delay) {
 
 function ResultsViewer({dataString, className}) {
     const [question, setQuestion] = useState(null);
+    const [notedVotes, setNotedVotes] = useState([]);
     const [error, setError] = useState("");
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -78,8 +80,19 @@ function ResultsViewer({dataString, className}) {
             }).catch(error => {
                 setError(error.toString())
             }).then(() => {
-                setIsLoading(false);
-                setCounter(5);
+                axios.get('/api/questions/' + question.id + '/noted').then((response) => {
+                    if (response.status === 200) {
+                        setNotedVotes(response.data);
+                    } else {
+                        console.debug(response);
+                        setError(response.data.error);
+                    }
+                }).catch(error => {
+                    setError(error.toString())
+                }).then(() => {
+                    setIsLoading(false);
+                    setCounter(5);
+                });
             });
         }
     }
@@ -93,12 +106,12 @@ function ResultsViewer({dataString, className}) {
     return (
         <div className={"col-12 p-0"}>
             {!isInitialized &&
-                <div className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
-                     style={{'zIndex': 50, 'backgroundColor': 'rgba(25,25,25,0.4)'}}>
-                    <div className="spinner-border text-light" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>
+            <div className="position-absolute h-100 w-100 d-flex justify-content-center align-items-center"
+                 style={{'zIndex': 50, 'backgroundColor': 'rgba(25,25,25,0.4)'}}>
+                <div className="spinner-border text-light" role="status">
+                    <span className="sr-only">Loading...</span>
                 </div>
+            </div>
             }
             <div className={"card-body row"}>
                 {error &&
@@ -119,7 +132,7 @@ function ResultsViewer({dataString, className}) {
                                 <li className="list-group-item list-group-item-success col-4 text-center">
                                     <h4 className={"mb-0"}>
                                         For<br/>
-                                        <span className="badge badge-success badge-pill">{data ? data.FOR : 0 }</span>
+                                        <span className="badge badge-success badge-pill">{data ? data.FOR : 0}</span>
                                     </h4>
                                 </li>
                                 <li className="list-group-item list-group-item-danger col-4 text-center">
@@ -131,12 +144,26 @@ function ResultsViewer({dataString, className}) {
                                 <li className="list-group-item list-group-item-warning col-4 text-center">
                                     <h4 className={"mb-0"}>
                                         Abstain<br/>
-                                        <span className="badge badge-warning badge-pill">{data ? data.ABSTAIN : 0}</span>
+                                        <span
+                                            className="badge badge-warning badge-pill">{data ? data.ABSTAIN : 0}</span>
                                     </h4>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    {isInitialized && notedVotes.length > 0 &&
+                    <div className={"my-4"}>
+                        <h5>Noted Votes:</h5>
+                        <div className="row">
+                            {notedVotes.map((notedVote, index) => {
+                                return <div key={index} className="col-6">
+                                    {notedVote.eng_soc.name} <span
+                                    className={"badge badge-secondary"}>{notedVote.vote}</span>
+                                </div>
+                            })}
+                        </div>
+                    </div>
+                    }
                     <div>
                         {(isInitialized && question['is_active'] !== 0) &&
                         <div className="float-right">
@@ -162,7 +189,6 @@ function ResultsViewer({dataString, className}) {
                         </div>
                         }
                     </div>
-
                 </div>
             </div>
         </div>
