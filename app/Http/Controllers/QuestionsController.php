@@ -81,6 +81,22 @@ class QuestionsController extends Controller
     }
 
     /**
+     * Display the specified question.
+     *
+     *
+     * @return RedirectResponse
+     */
+    public function active()
+    {
+        $question = Question::where('is_active', true)->first();
+
+        if (isset($question))
+            return redirect()->route('admin.questions.show', $question);
+        else
+            return redirect()->route('admin.questions');
+    }
+
+    /**
      * Show the form for editing the specified question.
      *
      * @param int $id
