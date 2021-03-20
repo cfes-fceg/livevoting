@@ -76,6 +76,8 @@ Route::group([
             ->name('admin.questions');
         Route::get('/create', 'QuestionsController@create')
             ->name('admin.questions.create');
+        Route::get('/active', 'QuestionsController@active')
+            ->name('admin.questions.active');
         Route::get('/{question}', 'QuestionsController@show')
             ->name('admin.questions.show')->where('id', '[0-9]+');
         Route::get('/{question}/edit', 'QuestionsController@edit')

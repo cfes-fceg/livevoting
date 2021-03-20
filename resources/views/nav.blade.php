@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.questions.create') }}">New Question</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-primary my-2" href="{{ route('admin.questions.active') }}">Active Question</a>
+                    </li>
                 @endif
             </ul>
 
