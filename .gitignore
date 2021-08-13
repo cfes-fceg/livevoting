@@ -17,3 +17,8 @@ _ide_helper_models.php
 /public/vendor/
 /storage/testing.sqlite
 /public/mix-manifest.json
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
